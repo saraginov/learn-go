@@ -2,6 +2,12 @@ package main
 
 import "fmt"
 
+/*
+	single line declaration and initialization of array outside of a func
+	OR we can set the values as we do for array a in main() manually or by loop
+*/
+var customVarThree[3]bool = [3]bool{true, false, true} 
+
 func main() {
 	/*
 		Arrays
@@ -25,4 +31,6 @@ func main() {
 
 	primes := [6]int{2, 3, 5, 7, 11, 13}
 	fmt.Println(primes)
+
+	fmt.Println(customVarThree)
 }
