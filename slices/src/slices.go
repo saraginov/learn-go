@@ -5,7 +5,8 @@ import (
 	"strings" //Package strings implements simple functions to manipulate UTF-8 encoded strings. 
 )
 
-var outSideOfFunc []int = []int{0,1,2,3,4,5}
+// var outSideOfFunc []int = []int{0,1,2,3,4,5}
+var outSideOfFunc = []int{0,1,2,3,4,5}
 
 func main(){
 	primes := [6]int{2,3,5,7,11,13}
