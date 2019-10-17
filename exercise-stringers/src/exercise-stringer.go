@@ -10,7 +10,13 @@ type IPAddrInterface interface{
 
 // TODO: Add a "String() string" method to IPAddr.
 func (ip IPAddr) String() string{
-	return "hello"
+	/* 
+		print the address as a dotted quad 
+		https://en.wikipedia.org/wiki/Dot-decimal_notation
+		
+		ex. 127.0.0.1
+	*/
+	return fmt.Sprintf("%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3])
 }
 
 func main() {
