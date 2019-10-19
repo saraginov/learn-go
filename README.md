@@ -1,3 +1,3 @@
 # learn-go
 
-~/go/bin$ ./tour
+~/golanggocode/bin$ ./tour
