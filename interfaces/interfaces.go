@@ -6,32 +6,38 @@ import (
 )
 
 /* ---------------------------------------------------------------------------------------------
-	Interfaces
-		An interface type is defined as a set of method signatures
-		A value of interface type can hold any value that implements those methods
+Interfaces
+	An interface type is defined as a set of method signatures
+	A value of interface type can hold any value that implements those methods
 */
-type Abser interface {Abs() float64}
 
+// Abser is
+type Abser interface{ Abs() float64 }
+
+// MyFloat is
 type MyFloat float64
 
-type Vertex struct {X, Y float64}
+// Vertex is
+type Vertex struct{ X, Y float64 }
 
-func (f MyFloat) Abs() float64{
+// Abs is
+func (f MyFloat) Abs() float64 {
 	/*
 		this method signature Abs,
 		is a value receiver,
 		it does not have paramters,
-		and it returns an float64
+		and it returns a float64
 	*/
-	if f < 0{
+	if f < 0 {
 		return float64(-f)
 	}
 	return float64(f)
 }
 
+// Abs is
 func (v *Vertex) Abs() float64 {
 	/*
-		this method signature Abs, 
+		this method signature Abs,
 		is a pointer receiver,
 		it does not have paramters,
 		and it returns an float64
@@ -40,18 +46,18 @@ func (v *Vertex) Abs() float64 {
 }
 
 func interfaces() {
-	var a Abser // Abs() float64 type == interface
+	var a Abser                             // Abs() float64 type == interface
 	fmt.Printf("a: %v, a type: %T\n", a, a) // output: a: <nil>, a type: <nil>
-	f := MyFloat(-math.Sqrt2) // -1.414213562, type == MyFloat
-	v := Vertex{3, 4} // {3, 4} type == Vertex
+	f := MyFloat(-math.Sqrt2)               // -1.414213562, type == MyFloat
+	v := Vertex{3, 4}                       // {3, 4} type == Vertex
 
-	a = f  // a MyFloat implements Abser; a == -1.414213562, type == MyFloat, MyFloat type == float64
+	a = f                                   // a MyFloat implements Abser; a == -1.414213562, type == MyFloat, MyFloat type == float64
 	fmt.Printf("a: %v, a type: %T\n", a, a) //output: a: -1.4142135623730951, a type: main.MyFloat
-	fmt.Println(a.Abs()) // output: 1.4142135623730951
+	fmt.Println(a.Abs())                    // output: 1.4142135623730951
 
-	a = &v // a *Vertex implements Abser
+	a = &v                                  // a *Vertex implements Abser
 	fmt.Printf("a: %v, a type: %T\n", a, a) // output: a: &{3 4}, a type: *main.Vertex
-	fmt.Println(a.Abs()) // output: 5
+	fmt.Println(a.Abs())                    // output: 5
 
 	// In the following line, v is a Vertex (not *Vertex)
 	// and does NOT implement Abser.
@@ -60,7 +66,7 @@ func interfaces() {
 		error: cannot use v(type Vertex) as type Abser in assignment:
 			Vertex does not implement Abser (Abs method has pointer receiver)
 
-		SUMMARY: 
+		SUMMARY:
 			identical error to:
 
 				var varTest int
@@ -69,7 +75,7 @@ func interfaces() {
 
 	// a = v
 	// fmt.Println(a.Abs())
-	
+
 	/*
 		HOWEVER,
 
@@ -77,34 +83,39 @@ func interfaces() {
 		remember
 		methods with value receivers, take either a value or a pointer as the receiver
 	*/
-	fmt.Println(v.Abs()) 
+	fmt.Println(v.Abs())
 }
 
 /*---------------------------------------------------------------------------------------------
-	Interfaces are implemented implicitly
-	
-		A type implements an interface by implementing its methods.
-		There is no explicit declaration of intent, no "implements" keyword
+Interfaces are implemented implicitly
 
-		Implicit interfacese decouple the definition of an interface from its implementation,
-		which could then appear in any package without prearrangement
+	A type implements an interface by implementing its methods.
+	There is no explicit declaration of intent, no "implements" keyword
+
+	Implicit interfacese decouple the definition of an interface from its implementation,
+	which could then appear in any package without prearrangement
 */
-type I interface { M() }
 
-type T struct {	S string}
+// I is
+type I interface{ M() }
+
+// T is
+type T struct{ S string }
 
 /*
 	This method 'M()' means:
 	type T implements the interface I,
 	but we don't need to explicitly declare that it does so.
 */
-func (t T) M(){
+
+// M is
+func (t T) M() {
 	fmt.Println(t.S)
 }
 
-func interfacesAreImplicit(){
+func interfacesAreImplicit() {
 	/*
-		when we initialize M(), 
+		when we initialize M(),
 		we declare that M() receives a value (value receiver) t of type T;
 		and because when type I is initialized and declared,
 		we assign M() as its value;
@@ -113,64 +124,70 @@ func interfacesAreImplicit(){
 		thus
 		we can pass it a value of type T to any instance of I
 	*/
-	var i I = T{"hello"}  
+	var i I = T{"hello"}
 	i.M()
 }
 
 /* ---------------------------------------------------------------------------------------------
-	Interface values
+Interface values
 
-		Under the hood, interface values can be thought of as a tuple value and a concrete type:
+	Under the hood, interface values can be thought of as a tuple value and a concrete type:
 
-			(value, type)
+		(value, type)
 
-		An interface value holds a value of a specific underlying concrete type.
+	An interface value holds a value of a specific underlying concrete type.
 
-		Calling a method on an interface value 
-		executes the method of the same name on its underlying type
-			ex. in interfacesAreImplicit:
-				
-				var i I = T{"hello"}  
-				i.M()
+	Calling a method on an interface value
+	executes the method of the same name on its underlying type
+		ex. in interfacesAreImplicit:
 
-				// T{"Hello"} is the interface's (i I) value
-				// i.M() executes M() for value receiver (t T), ie its underlying type
+			var i I = T{"hello"}
+			i.M()
+
+			// T{"Hello"} is the interface's (i I) value
+			// i.M() executes M() for value receiver (t T), ie its underlying type
 */
 
-type IValues interface {MValues()}
-type TValues struct {S string}
+// IValues is
+type IValues interface{ MValues() }
 
+// TValues is
+type TValues struct{ S string }
+
+// MValues is
 func (t *TValues) MValues() {
 	fmt.Println(t.S)
-} 
+}
 
+// FValues is
 type FValues float64
 
+// MValues is
 func (f FValues) MValues() {
 	fmt.Println(f)
 }
 
-func describe(i IValues){
+func describe(i IValues) {
 	fmt.Printf("(%v %T)\n", i, i)
 }
 
-func interfaceValues(){
+func interfaceValues() {
 	/*
-		 declare an instance of type IValues of name i,
-		 remember default init value of an interface is nil
+	 declare an instance of type IValues of name i,
+	 remember default init value of an interface is nil
 	*/
 	var i IValues
 	describe(i) // output: (<nil>, <nil>)
-		/*
-			i.MValues() results in runtime error!	
+	/*
+		i.MValues() results in runtime error!
 
-			panic: runtime error: invalid memory address or nil pointer dereference
-				[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x48ea0c]
-		*/
+		panic: runtime error: invalid memory address or nil pointer dereference
+			[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x48ea0c]
+	*/
 	// i.MValues()
 
-	i = &TValues{"Some String Value"} 
-	describe(i) // output: ( &{Some String Value} *interfaceValues.TValues ) 
+	i = &TValues{"Some String Value"}
+	describe(i) // output: ( &{Some String Value} *interfaceValues.TValues )
 	i.MValues() // output: Some String Value
 
 	i = FValues(math.Pi)
@@ -179,80 +196,85 @@ func interfaceValues(){
 }
 
 /* ---------------------------------------------------------------------------------------------
-	Interface values with nil underlying values
+Interface values with nil underlying values
 
-		If the concrete value inside the interface itself is nil,
-		the method will be called with a nil receiver. 
-			
-			NOTE: 	
-				In interfaceValues() above
-				before var i IValues is assigned a value 
-				I added describe(i) 
-				and i.MValues() 
-				when if interface method i.MValues() was called
-				with a nil value as pointer/value receiver
-				a runtime error returned
-				thus it imples nil values must be explicitly handled
+	If the concrete value inside the interface itself is nil,
+	the method will be called with a nil receiver.
 
-		In some languages this would trigger a null pointer exception,
-		but in Go it is common to write methods that
-		handle being called with a nil receiver
-		as shown below in interfaceNil()
-		when the method MNil() is called
+		NOTE:
+			In interfaceValues() above
+			before var i IValues is assigned a value
+			I added describe(i)
+			and i.MValues()
+			when if interface method i.MValues() was called
+			with a nil value as pointer/value receiver
+			a runtime error returned
+			thus it imples nil values must be explicitly handled
 
-		NOTE: 
-			!!! An interface value that holds a nil concrete value is itself non-nil
+	In some languages this would trigger a null pointer exception,
+	but in Go it is common to write methods that
+	handle being called with a nil receiver
+	as shown below in interfaceNil()
+	when the method MNil() is called
+
+	NOTE:
+		!!! An interface value that holds a nil concrete value is itself non-nil
 */
 
-type INil interface { MNil() }
-type TNil struct {S string}
+// INil is
+type INil interface{ MNil() }
 
-func (t *TNil) MNil(){
-	if t == nil{
+// TNil is
+type TNil struct{ S string }
+
+// MNil is
+func (t *TNil) MNil() {
+	if t == nil {
 		fmt.Println("<nil>")
 		return
 	}
 	fmt.Println(t.S)
 }
 
-func describeNil(i INil){
+func describeNil(i INil) {
 	fmt.Printf("(%v, %T)\n", i, i)
 }
 
-func interfacesNilUnderlyingValue(){
+func interfacesNilUnderlyingValue() {
 	var i INil
-	
+
 	var t *TNil // t is a pointer to a TNil value, its zero value is nil
 	i = t
 	describeNil(i) // output: (<nil>, *interfacesNil.TNil)
-	i.MNil() // output:<nil>
+	i.MNil()       // output:<nil>
 
-	i=&TNil{"hello from i type &tNill"}
+	i = &TNil{"hello from i type &tNill"}
 	describeNil(i) // output:(&{hello from i type &tNill}, *interfacesNil.TNil)
-	i.MNil() // output: hello from i type &tNill
+	i.MNil()       // output: hello from i type &tNill
 }
 
 /* ---------------------------------------------------------------------------------------------
-	Nil interface values
+Nil interface values
 
-		A nil interface value holds neither value nor concrete type
+	A nil interface value holds neither value nor concrete type
 
-		Calling a method on a nil interface is 
-		a run-time error
-		because 
-		there is no type 
-		inside the interface tuple
-		to indicate which 
-		concrete method to call
+	Calling a method on a nil interface is
+	a run-time error
+	because
+	there is no type
+	inside the interface tuple
+	to indicate which
+	concrete method to call
 */
 
-type NillInterface interface { NillM () }
+// NillInterface is
+type NillInterface interface{ NillM() }
 
-func describeNillInterface(i NillInterface){
+func describeNillInterface(i NillInterface) {
 	fmt.Printf("(%v %T)\n", i, i)
 }
 
-func nilInterfaceValue(){
+func nilInterfaceValue() {
 	var i NillInterface
 	describeNillInterface(i) // output: (<nil>, <nil>)
 
@@ -260,32 +282,32 @@ func nilInterfaceValue(){
 		panic: runtime error: invalid memory address or nil pointer dereference
 			[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x48e5af]
 	*/
-	// i.NillM() 
+	// i.NillM()
 }
 
 /* ---------------------------------------------------------------------------------------------
-	The empty interface
-		
-		The interface type that specifies zero methods
-		is know as the 
-		empty interface
+The empty interface
 
-			type SomeInterface interface {}
+	The interface type that specifies zero methods
+	is know as the
+	empty interface
 
-		An empty interface may hold values of any type
-		Every type implements at least zero methods
+		type SomeInterface interface {}
 
-		Empty interfaces are used by code that handles values of unknown type
-		For example
-			fmt.Print 
-			takes any number of arguments of type interface{}
+	An empty interface may hold values of any type
+	Every type implements at least zero methods
+
+	Empty interfaces are used by code that handles values of unknown type
+	For example
+		fmt.Print
+		takes any number of arguments of type interface{}
 */
 
-func describeEmptyInterface(i interface{}){
-	fmt.Printf("(%v %T)", i, i )
+func describeEmptyInterface(i interface{}) {
+	fmt.Printf("(%v %T)", i, i)
 }
 
-func emptyInterfaces(){
+func emptyInterfaces() {
 	var i interface{}
 	describeEmptyInterface(i) // output: (<nil>, <nil>)
 
@@ -297,7 +319,7 @@ func emptyInterfaces(){
 }
 
 //---------------------------------------------------------------------------------------------
-func main(){
+func main() {
 
 	interfaces()
 	interfacesAreImplicit()
