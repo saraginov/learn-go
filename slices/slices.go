@@ -2,21 +2,21 @@ package main
 
 import (
 	"fmt"
-	"strings" //Package strings implements simple functions to manipulate UTF-8 encoded strings. 
+	"strings" //Package strings implements simple functions to manipulate UTF-8 encoded strings.
 )
 
 // var outSideOfFunc []int = []int{0,1,2,3,4,5}
-var outSideOfFunc = []int{0,1,2,3,4,5}
+var outSideOfFunc = []int{0, 1, 2, 3, 4, 5}
 
-func main(){
-	primes := [6]int{2,3,5,7,11,13}
+func main() {
+	primes := [6]int{2, 3, 5, 7, 11, 13}
 
 	/*
 		Slices
-			
+
 			An array has a fixed size.
 			A slice on the other hand, is dynamically-sized,
-			flexible view into the elements of an array. 
+			flexible view into the elements of an array.
 
 			In practice, slices are much more common than arrays.
 
@@ -30,7 +30,7 @@ func main(){
 			This selects a half-open range which includes the first element,
 			but excludes the last one
 
-			ex. create slice (called a) with elements 1 through 3 
+			ex. create slice (called a) with elements 1 through 3
 				a [1:4]
 	*/
 
@@ -65,8 +65,8 @@ func main(){
 		makes b = ["XXX", "George"], inturn a = ["John", "XXX"],
 		names = ["John", "XXX","George", "Ringo",]
 	*/
-	b[0] = "XXX" 
-	fmt.Println(a,b) 
+	b[0] = "XXX"
+	fmt.Println(a, b)
 	fmt.Println(names)
 
 	/*
@@ -81,15 +81,15 @@ func main(){
 			var someSlice[]bool = []bool{true, false, true}
 			OR someSlice := []bool{true, false, true}
 
-			NOTE : 
+			NOTE :
 				Slices and Arrays are different
 				var someSlice[]bool = [5]int{1,2,3,4,5,} IS INVALID
 	*/
 
-	var someSlice[]bool = []bool{true, false, true}
+	var someSlice []bool = []bool{true, false, true}
 	fmt.Println(someSlice)
 
-	q := []int{2,3,5,7,11,13}
+	q := []int{2, 3, 5, 7, 11, 13}
 	fmt.Println(q)
 
 	r := []bool{true, false, true, true, false, true}
@@ -115,9 +115,9 @@ func main(){
 
 			The default us zero for the low bound and the length of the slice for the high bound.
 				I think typo in docs and length of slice should say length initializing array
-				If the difference between an array and a slice is length how can a slice have a default length? 
+				If the difference between an array and a slice is length how can a slice have a default length?
 
-			For the array 
+			For the array
 
 				var a [10]int
 
@@ -128,15 +128,15 @@ func main(){
 				a[:]
 	*/
 
-	sThree := []int{2,3,5,7,11,13}
+	sThree := []int{2, 3, 5, 7, 11, 13}
 	sThree = sThree[1:4]
-	fmt.Println(sThree) // output: [3,5,7] 
+	fmt.Println(sThree) // output: [3,5,7]
 	sThree = sThree[:2]
 	fmt.Println(sThree) // output: [3,5,]
-	sThree = sThree[1:] 
+	sThree = sThree[1:]
 	fmt.Println(sThree) // output: [5,]
 
-	sFour := []int{12,13,15,17,111,113}
+	sFour := []int{12, 13, 15, 17, 111, 113}
 	sFour = sFour[:]
 	fmt.Println(sFour) // output: [12,13,15,17,111,113]
 
@@ -144,7 +144,7 @@ func main(){
 		Slice length and capacity
 
 			A slice has both a length and capacity.
-			
+
 			The length of a slice is the number of elements it contains
 
 			The capacity of a slice is the number of elements in the underlying array,
@@ -153,24 +153,24 @@ func main(){
 			The length and capacity of a slice can be obtained using the expressions len(s) and cap(s)
 
 			You can extend a slice's length by re-slicing it,
-			provided it has sufficient capacity. 
+			provided it has sufficient capacity.
 
 		CAPACITY :
 			given we have some slice var sliceX []int = []int{1,2,3,4,5,6}
-				where len=6, cap=6 
+				where len=6, cap=6
 
 			when we re-slice sliceX, where sliceX = sliceX[low:high]
-			capacity is determined by subtracting 'low' from the original sliceX capacity (cap=6) 
+			capacity is determined by subtracting 'low' from the original sliceX capacity (cap=6)
 
-			for example 
+			for example
 				sliceX = sliceX[0:high], capacity will remain equal to 6
 				'high' only impacts the length of the slice
 				sliceX = slice[1: high], capacity will now be 6-1 = 5
 				sliceX = slice[3: high], capacity will now be 5-3 = 2
 
 			Extend Slice beyond capacity:
-				high MUST be less than or equal to capacity, 
-				else	
+				high MUST be less than or equal to capacity,
+				else
 					panic: runtime error: slice bounds out of range [low int: high int] with capacity int
 	*/
 
@@ -192,12 +192,12 @@ func main(){
 	sFive = sFive[2:]
 	printSlice(sFive)
 	// output: len=2 cap=4 [5 7]
-	
+
 	// Recreates slice
 	sFive = sFive[:4]
 	printSlice(sFive)
 	// output: len=4 cap=4 [5 7 11 13]
-	
+
 	// Slice 7,11
 	sFive = sFive[1:3]
 	printSlice(sFive)
@@ -220,7 +220,7 @@ func main(){
 	/*
 		Creating a slice with make
 
-			Slices can be created with the build-in make function;
+			Slices can be created with the built-in make function;
 			this is how you create dynamically-sized arrays
 
 			The make function allocates a zeroed array and returns a slice that refers to that array
@@ -258,9 +258,9 @@ func main(){
 
 	// Create a tic-tac-toe board
 	board := [][]string{
-		[]string{"_", "_", "_",},
-		[]string{"_", "_", "_",},
-		[]string{"_", "_", "_",},
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
 	}
 
 	// The players "take" turns
@@ -280,21 +280,20 @@ func main(){
 			_ _ O
 	*/
 
-
 	/*
 		Appending to a slice
 
 			It is common to append new elements to a slice,
 			Go provides a built-in function called "append"
-				
+
 				https://golang.org/pkg/builtin/#append
-			
+
 			func append(s []T, vs ...T)[]T
 
-				The first parameter s of append is a slice of type T, 
+				The first parameter s of append is a slice of type T,
 				the rest are T values to append to the slice
 
-				The resulting value of append is a slice containing 
+				The resulting value of append is a slice containing
 				all the elements of the original slice
 				plus the provided values
 
@@ -323,7 +322,7 @@ func main(){
 	/*
 		IMPORTANT :
 			given sSeven == len=2 cap=2 [0, 1]
-			sSeven = append(sSeven, 2, 3, 4, 5, 6, 7, 8) 
+			sSeven = append(sSeven, 2, 3, 4, 5, 6, 7, 8)
 			VS.
 			sSeven = append(sSeven, 2, 3, 4, 5, 6, 7, 8, 9,) // with or without comma following last element
 
@@ -339,7 +338,7 @@ func main(){
 	j := s[:10]
 	printSlice(j)
 	// expected output: len=10 cap=10 [0 1 2 3 4 5 6 7 9 0]
-	
+
 	k := s[:]
 	printSlice(k)
 	// expected output: len=9 cap=10 [0 1 2 3 4 5 6 7 9]
@@ -349,6 +348,6 @@ func printSlice(s []int) {
 	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
 }
 
-func printSliceWithString(s string, x []int){
+func printSliceWithString(s string, x []int) {
 	fmt.Printf("%s len=%d cap=%d %v\n", s, len(x), cap(x), x)
 }
