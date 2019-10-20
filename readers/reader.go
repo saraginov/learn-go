@@ -43,6 +43,9 @@ import (
 						// each time we call Read b gets overwritten, but there is no pointer to b
 						// and b is not assigned a return either...
 
+						VERY_IMPORTANT:
+						how does 'Read reads up to len(p) bytes into p'? *******!!!!
+
 						// the action is equivalent to declaring and initializing
 						// var scalar int in func main, passing scalar to v.Scale(scalar)
 						// and overriding its value inside of the method declaration
