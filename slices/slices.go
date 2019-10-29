@@ -177,6 +177,10 @@ func main() {
 	sFive := []int{2, 3, 5, 7, 11, 13}
 	printSlice(sFive)
 	// output: len=6 cap=6 [2 3 5 7 11 13]
+	low := 3
+	someVar := sFive[low:] //IMPORTANT: if not specified high is length of slice
+	printSlice(someVar)
+	// output: len=6 cap=6 [7 11 13]
 
 	// Slice the slice to give it zero length.
 	sFive = sFive[:0]
