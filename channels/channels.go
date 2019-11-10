@@ -81,8 +81,44 @@ func channels() {
 /*
 	Buffered Channels
 
+		Channels can be buffered. Provide the buffer length as the second argument to make to initialize a buffered channel
+
+		someChannel := make(chan int, 1000) // => where 1000 is the buffer size in bytes?
+
+		Sends the buffered channel block only when the buffer is full.
+
+			Receives block when the buffer is empty.
 */
+
+func bufferedChannels() {
+	ch := make(chan int, 2)
+	ch <- 1
+	ch <- 2
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+
+	/*
+		Overfilling the buffer causes the goroutine to stop
+
+		Running it locally, ran out of memory froze pc as an infinite loop would,
+		 in browser when running /tour it executes first for loop
+		 at some point while second loop executes it freezes there as well
+	*/
+
+	// overfilling buffer using a for loop
+
+	// for i := 0; i < 1000; i++ {
+	// 	ch <- i
+	// 	fmt.Println(<-ch)
+	// }
+
+	// for j := 0; j < 1000; j++ {
+	// 	ch <- j
+	// 	fmt.Println(<-ch)
+	// }
+}
+
 func main() {
 	channels()
-
+	bufferedChannels()
 }
