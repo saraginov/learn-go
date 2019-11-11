@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 /*
@@ -210,6 +211,43 @@ func runningSelect() {
 	secondFibonacci(c, quit)
 }
 
+/*
+	The Select default
+
+	The default case in a select is run if no other case is ready.
+
+	Use a default case to try a send or receive without blocking:
+
+		select {
+		case i := <-c:
+			// use i
+		default:
+			// receiving from c would block
+		}
+*/
+
+func defaultSelect() {
+	/*
+		tick every second, every half a second print ...
+		BOOM! after 5 seconds
+	*/
+	tick := time.Tick(1000 * time.Millisecond)
+	boom := time.After(5000 * time.Millisecond)
+
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			return
+		default:
+			fmt.Println("...")
+			time.Sleep(500 * time.Millisecond)
+		}
+	}
+}
+
 func main() {
 	channels()
 	fmt.Println("CHANNELS --------------------------------------- END")
@@ -222,4 +260,7 @@ func main() {
 
 	runningSelect()
 	fmt.Println("SELECT  --------------------------------------- END")
+
+	defaultSelect()
+	fmt.Println(" DEFAULT SELECT  --------------------------------------- END")
 }
