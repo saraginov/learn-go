@@ -163,8 +163,63 @@ func rangeAndClose() {
 
 }
 
+/*
+	Select
+
+	The select statement lets a goroutine wait on multiple communication operations.
+
+	A select blocks until one of its cases can run, then executes that case.
+
+	It chooses at random if multiple are ready!
+*/
+
+func secondFibonacci(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		fmt.Println("running an iteration of for loop in Fibonacci....")
+		select {
+		case c <- x:
+			x, y = y, x+y
+		case <-quit:
+			fmt.Println("quit")
+			return
+		}
+	}
+}
+
+func runningSelect() {
+	/*
+		The order of operations in this example is really peculiar,
+		in that both the IIFE below and secondFibonacci run once the first time
+		and then the time it takes to execute an iteration of the for loop
+		in each function yields an A, B, B, A, A, B, B, A, A, ...
+		(identical behaviour in browser)
+	*/
+	c := make(chan int)
+	quit := make(chan int)
+
+	go func() { // IIFE
+		for i := 0; i < 10; i++ {
+			fmt.Println("running iteration of for loop in go func IIFE")
+			fmt.Println(<-c)
+		}
+
+		quit <- 0
+	}()
+
+	secondFibonacci(c, quit)
+}
+
 func main() {
 	channels()
+	fmt.Println("CHANNELS --------------------------------------- END")
+
 	bufferedChannels()
+	fmt.Println("BUFFERED CHANNELS --------------------------------------- END")
+
 	rangeAndClose()
+	fmt.Println("RANGE AND CLOSE  --------------------------------------- END")
+
+	runningSelect()
+	fmt.Println("SELECT  --------------------------------------- END")
 }
