@@ -75,6 +75,9 @@ func channels() {
 	// y is return from second sum goroutine
 	// goroutines appear to be executed bottom->top order
 
+	// How do x and y know which value in the c channel is the one intended for them?
+	// Is there an automatic buffer when not set?
+
 	// fmt.Println(x, y, x+y, z)
 	fmt.Println(x, y, x+y, z)
 }

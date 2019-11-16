@@ -39,4 +39,7 @@ func say(s string) {
 func main() {
 	go say("world") // I get different outputs locally vs when running identical code on tour of go
 	say("hello")
+	// inconsistent outputs in go/bin/tour
+	// hello printed 5 times consistently, world at times printed 5 times, others 4 times
+	// order in which hello and world are printed also inconsinstent
 }
