@@ -1,19 +1,23 @@
 # learn-go
 
-Intro to GO based on https://tour.golang.org/welcome/1
+Intro to GO based on <https://tour.golang.org/welcome/1>
 
 ## go run fileName.go
 
 To run go files cd to target dir, in cli execute **go run fileName.go**, for example:
-            
-**go run ./arrays/array.go**
 
-## Compile and create binary executable 
+``` bash
+go run ./arrays/array.go
+```
 
-cli cmd https://golang.org/cmd/go/
+## Compile and create binary executable
 
-**go build [-o output] [-i] [build flags] [packages]**
+cli cmd <https://golang.org/cmd/go/>
 
-in target dir **go install**
+``` bash
+go build [-o output] [-i] [build flags] [packages]
+```
 
-To see details **go help [command name]**
+in target dir `go install`
+
+To see details `go help [command name]`
