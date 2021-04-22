@@ -9,7 +9,19 @@ There are package, file, func and block scopes.
 A unique name bound to a scope. Same name cannot be declared a second time
 inside the same scope.
 
+For example if we have 2 files, one for main, and the second for additional
+declarations, if both files belong to the same package, i.e. main; it follows
+that if both use the same name to declare a function or variable or any other
+property, an error will be invoked. Unlike other languages, name spaces do not
+collide and overwrite each other depending on import/declaration order.
+
 ## Package Scope
+
+Each Go package has its own scope. Ex. declared `func`(s) are only visible to
+the files which belong to the same package.
+
+Declarations which are outside of the functions are visible to the files that
+belong to the same package.
 
 ``` go
 package main
