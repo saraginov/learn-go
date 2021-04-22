@@ -12,3 +12,7 @@ package main
 // each file may only have 1 package clause
 
 ```
+
+Library packages can be imported but not executed, where as an executable package can be executed but not imported.
+
+Library Packages can have any name.
