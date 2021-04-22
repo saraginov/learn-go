@@ -63,3 +63,9 @@ func main() {
 ## Operator
 
 An operator is used to combine expressions.
+
+## go doc
+
+When a comment starts above a line of code that has a package clause, or a
+declaration, Golang will use the comment to automatically create code
+documentation.
