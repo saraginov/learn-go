@@ -24,4 +24,9 @@ func main() {
 	// `"dark " + color` is an expression
 	color = "dark " + color
 	fmt.Println(color)
+
+	speed := 100                        // int
+	force := 2.5                        // float
+	speed = int(float64(speed) * force) // potential loss of data, but just ex
+	fmt.Println(speed)
 }
