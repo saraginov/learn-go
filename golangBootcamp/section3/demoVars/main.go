@@ -27,4 +27,11 @@ func main() {
 	// we must declare variable
 	// var1 := 50
 	fmt.Println(var1, var3)
+
+	// sum should be 30.5
+	sum := 27 + 3.5
+	fmt.Println(sum)
+
+	sup, sup2, sup3 := "sup", "", "sup3"
+	fmt.Println(sup, sup2, sup3)
 }

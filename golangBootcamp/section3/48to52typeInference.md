@@ -92,3 +92,33 @@ score := 0 // Don't
 // dos
 var score int // 0 by default
 ```
+
+## examples
+
+``` go
+package main
+import "fmt"
+func main() {
+    i := 314
+    f := 3.14
+    s := "Hello"
+    b := true
+
+    fmt.Println(
+        "i:", i,
+        "f:", f,
+        "s:", s,
+        "b:", b,
+    )
+    
+    a, b := 14, true
+    fmt.Println(a, b)
+    
+    sum := 27 + 3.5
+    fmt.Println(sum)
+    
+    // You can discard values in a short declaration
+    on, _ := true, true
+    fmt.Println(on)
+}
+```
