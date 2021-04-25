@@ -26,6 +26,6 @@ if the the other package is imported.
 To export a package's declarations, their names must start with a capital
 letter. There are no `public` or `private` keywords.
 
-// all other paths were giving me import errors
-// when importing a package it will automatically be searched under
-// `$GOPATH/src` by the golang compiler
+all other paths were giving me import errors
+when importing a package it will automatically be searched under
+`$GOPATH/src` by the golang compiler

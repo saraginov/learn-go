@@ -34,11 +34,14 @@ underscore, `_`, e.g. `_myVar`, or a unicode character.
 A name cannot start with a number or punctuation. Cannot contain punctuation
 whatsoever.
 
-Obviously can;t use reserved keywords as variable names.
+Obviously can't use reserved keywords as variable names.
 
 Once a variable's type has been declared, it cannot be changed!
 
 ## zero values
+
+Once a variable has been declared, if it is not initialized explicitly,
+Golang initializes it on it's own to the corresponding data type zero value.
 
 boolean: false
 numeric: 0
@@ -114,3 +117,21 @@ func main() {
     var r rune  // also a numeric type
     var by byte // also a numeric type
 ```
+
+## Variable && Short variable declarations
+
+``` go
+// long/regular variable declaration
+var varName int
+// var varName data type
+
+// short variable declaration
+variableName := "initial value"
+variable := 10
+// variableName and variable data types get inferred by go compiler
+```
+
+Short variable declaration can only be used inside a function.
+
+Go is statically typed language, i.e. once a variable's type has been declared
+it cannot be changed.
