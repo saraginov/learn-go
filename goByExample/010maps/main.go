@@ -19,4 +19,7 @@ func main() {
 	// 2nd arg returned when getting value indicates if key present in map
 	_, prs := m["k2"]
 	fmt.Println("present:", prs)
+
+	n := map[string]int{"foo": 1, "bar": 2}
+	fmt.Println("map:", n)
 }
