@@ -84,3 +84,10 @@ means that the use doesn't have required privileges to perform an action;
 Go follows a simple rule that states functions, variables, data types, struct
 fields, etc. that begin with an uppercase letter are public, whereas if they
 begin with a lowercase they are private.
+
+Author (Mihalis T.) did not specify what is considered public and what is
+considered private. From what I remember from go play ground "public" means it
+can be imported from other files or packages (I don't remember which)
+this: <https://tour.golang.org/basics/3>, a name is exported if it begins with a
+capital letter. When importing a package, only its exported names can be
+referred to. Un-exported names are not accessible from outside the package.
