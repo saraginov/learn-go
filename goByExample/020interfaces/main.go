@@ -41,6 +41,12 @@ func main() {
 	r := rect{width: 10, height: 30}
 	c := circle{radius: 2.5}
 
+	// Assigning b to an interface value of type Stringer sets both words of the
+	// interface value
+	var b rect
+	b = rect{width: 1, height: 1}
+	measure(b)
+
 	measure(r)
 	measure(c)
 }
