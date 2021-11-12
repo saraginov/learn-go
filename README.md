@@ -21,3 +21,7 @@ go build [-o output] [-i] [build flags] [packages]
 in target dir `go install`
 
 To see details `go help [command name]`
+
+## Specs
+
+<https://golang.org/ref/spec#Type_assertions>
