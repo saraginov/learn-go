@@ -22,8 +22,13 @@ func main() {
 	}()
 
 	for i := 0; i < 2; i++ {
+		fmt.Println("i", i)
 		// use select to await both of these values simultaneously, printing each
 		// one as it arrives
+		// during first for loop iteration, until c1, or c2 is received we are
+		// blocked, nothing happens, in our case c1 arrives after 1 second, then
+		// second loop iteration is immediately invoked and we are blocked again
+		// 1 second later the 2nd iife is invoked and c2 arrives
 		select {
 		case msg1 := <-c1:
 			fmt.Println("received", msg1)
