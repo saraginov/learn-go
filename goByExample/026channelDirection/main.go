@@ -12,6 +12,10 @@ func ping(pings chan<- string, msg string) {
 func pong(pings <-chan string, pongs chan<- string) {
 	msg := <-pings
 	pongs <- msg
+	// can I just do
+	// pongs <- pings no I cannot because pings is an incoming channeland
+	// pongs is a channel which takes a string, therefore pongs <- pings is
+	// passing a channel to pongs instead of a string and it throws an error
 }
 
 func main() {
