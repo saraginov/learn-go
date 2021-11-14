@@ -34,7 +34,7 @@ func main() {
 	// has a value so why does it not match select case below?
 	// modifying go routine to match main.go in timeouts, it's not working either
 	// go func() {
-	// 	time.Sleep(2 * time.Second)
+	// 	time.Sleep(2 * time.Second
 	// 	messages <- "did you receive this?"
 	// }()
 	// fmt.Println(<-messages)
