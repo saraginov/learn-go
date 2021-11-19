@@ -27,6 +27,9 @@ func main() {
 	results := make(chan int, numJobs)
 	codes := []string{"A", "B", "C", "D", "E", "F"}
 
+	// verify
+	startTime := time.Now()
+
 	// step 2: start up workers, blocked until jobs are sent
 	for w := 0; w < 3; w++ {
 		go worker(codes[w], jobs, results)
@@ -44,6 +47,10 @@ func main() {
 	for a := 1; a <= numJobs; a++ {
 		<-results // ensure worker go
 	}
+
+	endTime := time.Now()
+	fmt.Println(startTime.Format("01-02-2006 15:04:05.000000000"))
+	fmt.Println(endTime.Format("01-02-2006 15:04:05.000000000"))
 }
 
 // if worker is blocked until jobs are done, how is worker C starting job
