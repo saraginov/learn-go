@@ -37,6 +37,9 @@ func main() {
 		// defer statement = defers the execution until surrounding function returns
 		// i.e. when closure returns, wg.Done() is invoked
 		go func() {
+			// this approach has no straight forward way to propagate errors from
+			// workers. For more advanced use cases consider using errgroup package
+			// <https://pkg.go.dev/golang.org/x/sync/errgroup>
 			defer wg.Done()
 			worker(i)
 		}()
